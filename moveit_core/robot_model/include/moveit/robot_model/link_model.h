@@ -44,6 +44,7 @@
 #include <eigen_stl_containers/eigen_stl_vector_container.h>
 #include <moveit/macros/class_forward.h>
 #include <geometric_shapes/check_isometry.h>
+#include <moveit/macros/visibility_control.hpp>
 
 namespace shapes
 {
@@ -69,7 +70,7 @@ typedef std::map<const LinkModel*, Eigen::Isometry3d, std::less<const LinkModel*
     LinkTransformMap;
 
 /** \brief A link from the robot. Contains the constant transform applied to the link and its geometry */
-class LinkModel
+class MOVEIT_CORE_PUBLIC LinkModel
 {
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW

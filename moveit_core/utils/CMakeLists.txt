@@ -25,6 +25,7 @@ if(BUILD_TESTING)
   ament_target_dependencies(${MOVEIT_TEST_LIB_NAME}
     Boost
     geometry_msgs
+    rclcpp
     urdf
     srdfdom
     urdfdom
