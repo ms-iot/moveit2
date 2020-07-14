@@ -141,7 +141,7 @@ MOVEIT_CLASS_FORWARD(KinematicsBase)
  * @class KinematicsBase
  * @brief Provides an interface for kinematics solvers.
  */
-class MOVEIT_CORE_PUBLIC KinematicsBase
+class KinematicsBase
 {
 public:
   static const rclcpp::Logger LOGGER;
@@ -422,6 +422,7 @@ public:
    * @param redundant_joint_names The set of redundant joint names.
    * @return False if any of the input joint indices are invalid (exceed number of joints)
    */
+  MOVEIT_CORE_PUBLIC
   bool setRedundantJoints(const std::vector<std::string>& redundant_joint_names);
 
   /**
@@ -463,6 +464,7 @@ public:
   /**
    * @brief  Set the search discretization value for all the redundant joints
    */
+  MOVEIT_CORE_PUBLIC
   void setSearchDiscretization(double sd)
   {
     redundant_joint_discretization_.clear();
@@ -477,6 +479,7 @@ public:
    *
    * @param discretization a map of joint indices and discretization value pairs.
    */
+  MOVEIT_CORE_PUBLIC
   void setSearchDiscretization(const std::map<int, double>& discretization)
   {
     redundant_joint_discretization_.clear();
@@ -491,9 +494,11 @@ public:
   /**
    * @brief  Get the value of the search discretization
    */
+  MOVEIT_CORE_PUBLIC
   double getSearchDiscretization(int joint_index = 0) const
   {
     if (redundant_joint_discretization_.count(joint_index) > 0)
+    
     {
       return redundant_joint_discretization_.at(joint_index);
     }
@@ -507,6 +512,7 @@ public:
    * @brief Returns the set of supported kinematics discretization search types.  This implementation only supports
    * the DiscretizationMethods::ONE search.
    */
+  MOVEIT_CORE_PUBLIC
   std::vector<DiscretizationMethod> getSupportedDiscretizationMethods() const
   {
     return supported_methods_;
@@ -514,6 +520,7 @@ public:
 
   /** @brief For functions that require a timeout specified but one is not specified using arguments,
       a default timeout is used, as set by this function (and initialized to KinematicsBase::DEFAULT_TIMEOUT) */
+  MOVEIT_CORE_PUBLIC
   void setDefaultTimeout(double timeout)
   {
     default_timeout_ = timeout;
@@ -521,6 +528,7 @@ public:
 
   /** @brief For functions that require a timeout specified but one is not specified using arguments,
       this default timeout is used */
+  MOVEIT_CORE_PUBLIC
   double getDefaultTimeout() const
   {
     return default_timeout_;
@@ -531,6 +539,7 @@ public:
    */
   virtual ~KinematicsBase();
 
+  MOVEIT_CORE_PUBLIC
   KinematicsBase();
 
 protected:
