@@ -14,6 +14,7 @@ if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     -Wno-unused-parameter -Wno-unused-function)
 else()
   add_compile_options(/W3 /wd4251 /wd4068 /wd4275)
+  add_compile_options(/D_USE_MATH_DEFINES)
 endif()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
