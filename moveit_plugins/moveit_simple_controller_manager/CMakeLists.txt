@@ -11,6 +11,20 @@ if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
+find_package(ASSIMP QUIET)
+if(NOT ASSIMP_FOUND)
+  find_package(PkgConfig REQUIRED)
+  # assimp is required, so REQUIRE the second attempt
+  pkg_check_modules(ASSIMP_PC REQUIRED assimp)
+  set(ASSIMP_INCLUDE_DIRS ${ASSIMP_PC_INCLUDE_DIRS})
+endif()
+
+# find *absolute* paths to ASSIMP_LIBRARIES
+# Both, pkg-config and assimp's cmake-config don't provide an absolute library path.
+# For, pkg-config the path is in ASSIMP_PC_LIBRARY_DIRS, for cmake in ASSIMP_LIBRARY_DIRS.
+find_library(ASSIMP_ABS_LIBRARIES NAMES ${ASSIMP_LIBRARIES} assimp HINTS ${ASSIMP_LIBRARY_DIRS} ${ASSIMP_PC_LIBRARY_DIRS})
+set(ASSIMP_LIBRARIES "${ASSIMP_ABS_LIBRARIES}")
+
 find_package(Boost REQUIRED thread)
 find_package(ament_cmake REQUIRED)
 find_package(moveit_core REQUIRED)
@@ -26,6 +40,7 @@ add_library(${PROJECT_NAME} SHARED
   src/follow_joint_trajectory_controller_handle.cpp
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${PROJECT_NAME}
   rclcpp
   control_msgs

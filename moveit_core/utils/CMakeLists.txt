@@ -34,6 +34,7 @@ if(BUILD_TESTING)
   )
 
   set_target_properties(${MOVEIT_TEST_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+  set_target_properties(${MOVEIT_TEST_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
   ament_export_libraries(${MOVEIT_TEST_LIB_NAME} ${MOVEIT_LIB_NAME})
   ament_export_include_directories(include)
