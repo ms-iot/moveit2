@@ -13,7 +13,7 @@ if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
     -Wno-unused-parameter -Wno-unused-function)
 else()
-  add_compile_options(/W3)
+  add_compile_options(/W3 /wd4251 /wd4068 /wd4275)
 endif()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
