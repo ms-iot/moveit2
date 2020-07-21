@@ -69,22 +69,7 @@ find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
 set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
 endif()
 
-find_package(ASSIMP QUIET)
-if(NOT ASSIMP_FOUND)
-  find_package(PkgConfig REQUIRED)
-  # assimp is required, so REQUIRE the second attempt
-  pkg_check_modules(ASSIMP_PC REQUIRED assimp)
-  set(ASSIMP_INCLUDE_DIRS ${ASSIMP_PC_INCLUDE_DIRS})
-endif()
-
-# find *absolute* paths to ASSIMP_LIBRARIES
-# Both, pkg-config and assimp's cmake-config don't provide an absolute library path.
-# For, pkg-config the path is in ASSIMP_PC_LIBRARY_DIRS, for cmake in ASSIMP_LIBRARY_DIRS.
-find_library(ASSIMP_ABS_LIBRARIES NAMES ${ASSIMP_LIBRARIES} assimp HINTS ${ASSIMP_LIBRARY_DIRS} ${ASSIMP_PC_LIBRARY_DIRS})
-set(ASSIMP_LIBRARIES "${ASSIMP_ABS_LIBRARIES}")
-
-
-find_package(OCTOMAP REQUIRED)
+find_package(octomap REQUIRED)
 find_package(urdfdom REQUIRED)
 find_package(urdf REQUIRED)
 find_package(urdfdom_headers REQUIRED)
