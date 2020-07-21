@@ -1,11 +1,23 @@
 repositories:
   moveit2:
     type: git
-    url: https://github.com/ros-planning/moveit2
+    url: https://github.com/lilustga/moveit2
     version: master
   moveit_msgs:
     type: git
     url: https://github.com/ros-planning/moveit_msgs
+    version: ros2
+  joint_state_publisher:
+    type: git
+    url: https://github.com/ros/joint_state_publisher
+    version: ros2
+  random_numbers:
+    type: git
+    url: https://github.com/lilustga/random_numbers
+    version: ros2
+  urdf_parser_py:
+    type: git
+    url: https://github.com/ros/urdf_parser_py
     version: ros2
   moveit_resources:
     type: git
@@ -13,11 +25,11 @@ repositories:
     version: ros2
   geometric_shapes:
     type: git
-    url: https://github.com/ros-planning/geometric_shapes
-    version: ros2
+    url: https://github.com/lilustga/geometric_shapes
+    version: dashing-devel
   srdfdom:
     type: git
-    url: https://github.com/PickNikRobotics/srdfdom
+    url: https://github.com/lilustga/srdfdom
     version: ros2
 
 # TODO(#242): Remove below once console_bridge conflict is resolved
