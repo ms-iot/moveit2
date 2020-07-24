@@ -41,7 +41,18 @@ repositories:
     type: git
     url: https://github.com/ros/urdfdom_headers
     version: foxy
-
+  octomap_msgs:
+    type: git
+    url: https://github.com/OctoMap/octomap_msgs
+    version: ros2
+  eigen_stl_containers:
+    type: git
+    url: https://github.com/ros/eigen_stl_containers
+    version: ros2
+  control_msgs:
+    type: git
+    url: https://github.com/ros-controls/control_msgs
+    version: foxy-devel
   ros2_control:
     type: git
     url: https://github.com/ros-controls/ros2_control
