@@ -31,10 +31,6 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-# boost::iostreams on Windows depends on boost::zlib
-if(WIN32)
-  set(EXTRA_BOOST_COMPONENTS zlib)
-endif()
 find_package(Boost REQUIRED system filesystem date_time thread iostreams regex ${EXTRA_BOOST_COMPONENTS})
 
 find_package(eigen3_cmake_module REQUIRED)
@@ -69,7 +65,7 @@ find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
 set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
 endif()
 
-find_package(octomap REQUIRED)
+find_package(OCTOMAP REQUIRED)
 find_package(urdfdom REQUIRED)
 find_package(urdf REQUIRED)
 find_package(urdfdom_headers REQUIRED)

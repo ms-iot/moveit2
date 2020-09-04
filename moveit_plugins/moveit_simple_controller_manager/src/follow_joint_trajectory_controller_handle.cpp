@@ -73,7 +73,7 @@ bool FollowJointTrajectoryControllerHandle::sendTrajectory(const moveit_msgs::ms
   };
   // Result callback
   send_goal_options.result_callback =
-      std::bind(&FollowJointTrajectoryControllerHandle::controllerDoneCallback, this, _1);
+      std::bind(&FollowJointTrajectoryControllerHandle::controllerDoneCallback, this, boost::placeholders::_1);
 
   done_ = false;
   last_exec_ = moveit_controller_manager::ExecutionStatus::RUNNING;

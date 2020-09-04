@@ -47,6 +47,7 @@
 #include <moveit/controller_manager/controller_manager.h>
 #include <boost/thread.hpp>
 #include <pluginlib/class_loader.hpp>
+#include <moveit/trajectory_execution_manager/visibility_control.hpp>
 
 #include <memory>
 
@@ -60,7 +61,7 @@ MOVEIT_CLASS_FORWARD(TrajectoryExecutionManager)
 class TrajectoryExecutionManager
 {
 public:
-  static const std::string EXECUTION_EVENT_TOPIC;
+  TRAJECTORY_EXECUTION_MANAGER_PUBLIC static const std::string EXECUTION_EVENT_TOPIC;
 
   /// Definition of the function signature that is called when the execution of all the pushed trajectories completes.
   /// The status of the overall execution is passed as argument

@@ -9,6 +9,11 @@ qt5_wrap_ui(UIC_FILES
   src/ui/motion_planning_rviz_plugin_frame_joints.ui
 )
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  add_compile_options(/W3 /wd4251 /wd4068 /wd4275)
+  add_compile_options(/D_USE_MATH_DEFINES)
+endif()
+
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # Plugin Source

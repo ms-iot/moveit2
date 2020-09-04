@@ -43,6 +43,7 @@ set_target_properties(moveit_generate_state_database PROPERTIES OUTPUT_NAME "gen
 
 add_library(moveit_ompl_planner_plugin SHARED src/ompl_planner_manager.cpp)
 set_target_properties(moveit_ompl_planner_plugin PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(moveit_ompl_planner_plugin PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(moveit_ompl_planner_plugin
   moveit_core
   moveit_ros_planning

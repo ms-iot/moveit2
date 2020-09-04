@@ -16,6 +16,7 @@ ament_target_dependencies(${MOVEIT_LIB_NAME}
   LIBCCD
   Boost
   visualization_msgs
+  OCTOMAP
 )
 target_link_libraries(${MOVEIT_LIB_NAME}
   moveit_collision_detection
