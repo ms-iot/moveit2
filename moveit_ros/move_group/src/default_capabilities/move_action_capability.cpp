@@ -71,7 +71,7 @@ void MoveGroupMoveAction::initialize()
         RCLCPP_INFO(LOGGER, "Received request to cancel goal");
         return rclcpp_action::CancelResponse::ACCEPT;
       },
-      std::bind(&MoveGroupMoveAction::executeMoveCallback, this, _1));
+      std::bind(&MoveGroupMoveAction::executeMoveCallback, this, std::placeholders::_1));
 }
 
 void MoveGroupMoveAction::executeMoveCallback(std::shared_ptr<MGActionGoal> goal)
