@@ -93,27 +93,27 @@ ServoCalcs::ServoCalcs(rclcpp::Node::SharedPtr node, const ServoParametersPtr& p
   using std::placeholders::_1;
   using std::placeholders::_2;
   joint_state_sub_ = node_->create_subscription<sensor_msgs::msg::JointState>(
-      parameters_->joint_topic, ROS_QUEUE_SIZE, std::bind(&ServoCalcs::jointStateCB, this, boost::placeholders::_1));
+      parameters_->joint_topic, ROS_QUEUE_SIZE, std::bind(&ServoCalcs::jointStateCB, this, _1));
 
   twist_stamped_sub_ = node_->create_subscription<geometry_msgs::msg::TwistStamped>(
-      parameters_->cartesian_command_in_topic, ROS_QUEUE_SIZE, std::bind(&ServoCalcs::twistStampedCB, this, boost::placeholders::_1));
+      parameters_->cartesian_command_in_topic, ROS_QUEUE_SIZE, std::bind(&ServoCalcs::twistStampedCB, this, _1));
 
   joint_cmd_sub_ = node_->create_subscription<control_msgs::msg::JointJog>(
-      parameters_->joint_command_in_topic, ROS_QUEUE_SIZE, std::bind(&ServoCalcs::jointCmdCB, this, boost::placeholders::_1));
+      parameters_->joint_command_in_topic, ROS_QUEUE_SIZE, std::bind(&ServoCalcs::jointCmdCB, this, _1));
 
   // ROS Server for allowing drift in some dimensions
   drift_dimensions_server_ = node_->create_service<moveit_msgs::srv::ChangeDriftDimensions>(
       std::string(node_->get_fully_qualified_name()) + "/change_drift_dimensions",
-      std::bind(&ServoCalcs::changeDriftDimensions, this, boost::placeholders::_1, boost::placeholders::_2));
+      std::bind(&ServoCalcs::changeDriftDimensions, this, _1, _2));
 
   // ROS Server for changing the control dimensions
   control_dimensions_server_ = node_->create_service<moveit_msgs::srv::ChangeControlDimensions>(
       std::string(node_->get_fully_qualified_name()) + "/change_control_dimensions",
-      std::bind(&ServoCalcs::changeControlDimensions, this, boost::placeholders::_1, boost::placeholders::_2));
+      std::bind(&ServoCalcs::changeControlDimensions, this, _1, _2));
 
   // Subscribe to the collision_check topic
   collision_velocity_scale_sub_ = node_->create_subscription<std_msgs::msg::Float64>(
-      "collision_velocity_scale", ROS_QUEUE_SIZE, std::bind(&ServoCalcs::collisionVelocityScaleCB, this, boost::placeholders::_1));
+      "collision_velocity_scale", ROS_QUEUE_SIZE, std::bind(&ServoCalcs::collisionVelocityScaleCB, this, _1));
 
   // Publish to collision_check for worst stop time
   worst_case_stop_time_pub_ = node_->create_publisher<std_msgs::msg::Float64>("worst_case_stop_time", ROS_QUEUE_SIZE);

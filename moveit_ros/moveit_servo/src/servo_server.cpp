@@ -57,13 +57,13 @@ ServoServer::ServoServer(const rclcpp::NodeOptions& options) : Node("servo_servi
   using std::placeholders::_1;
   using std::placeholders::_2;
   start_servo_service_ =
-      this->create_service<std_srvs::srv::Trigger>("start_servo", std::bind(&ServoServer::startCB, this, boost::placeholders::_1, boost::placeholders::_2));
+      this->create_service<std_srvs::srv::Trigger>("start_servo", std::bind(&ServoServer::startCB, this, _1, _2));
   stop_servo_service_ =
-      this->create_service<std_srvs::srv::Trigger>("stop_servo", std::bind(&ServoServer::stopCB, this, boost::placeholders::_1, boost::placeholders::_2));
+      this->create_service<std_srvs::srv::Trigger>("stop_servo", std::bind(&ServoServer::stopCB, this, _1, _2));
   pause_servo_service_ =
-      this->create_service<std_srvs::srv::Trigger>("pause_servo", std::bind(&ServoServer::pauseCB, this, boost::placeholders::_1, boost::placeholders::_2));
+      this->create_service<std_srvs::srv::Trigger>("pause_servo", std::bind(&ServoServer::pauseCB, this, _1, _2));
   unpause_servo_service_ =
-      this->create_service<std_srvs::srv::Trigger>("unpause_servo", std::bind(&ServoServer::unpauseCB, this, boost::placeholders::_1, boost::placeholders::_2));
+      this->create_service<std_srvs::srv::Trigger>("unpause_servo", std::bind(&ServoServer::unpauseCB, this, _1, _2));
 }
 
 bool ServoServer::init()

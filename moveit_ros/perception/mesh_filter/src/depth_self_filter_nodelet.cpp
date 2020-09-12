@@ -93,7 +93,7 @@ void mesh_filter::DepthSelfFiltering::onInit()
   model_label_ptr_.reset(new cv_bridge::CvImage);
 
   mesh_filter_.reset(
-      new MeshFilter<StereoCameraModel>(bind(&TransformProvider::getTransform, &transform_provider_, boost::placeholders::_1, boost::placeholders::_2),
+      new MeshFilter<StereoCameraModel>(bind(&TransformProvider::getTransform, &transform_provider_, _1, _2),
                                         mesh_filter::StereoCameraModel::RegisteredPSDKParams));
   mesh_filter_->parameters().setDepthRange(near_clipping_plane_distance_, far_clipping_plane_distance_);
   mesh_filter_->setShadowThreshold(shadow_threshold_);
