@@ -1,8 +1,8 @@
 repositories:
   moveit2:
     type: git
-    url: https://github.com/lilustga/moveit2
-    version: master
+    url: https://github.com/ms-iot/moveit2
+    version: windows/main/d95e4aecf4ac7a0f8b43fe91742b86251b8762ca
   moveit_msgs:
     type: git
     url: https://github.com/ros-planning/moveit_msgs
