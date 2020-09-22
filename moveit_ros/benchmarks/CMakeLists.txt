@@ -12,12 +12,15 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(moveit_common REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(Boost REQUIRED date_time filesystem)
 find_package(tf2_eigen REQUIRED)
 find_package(moveit_ros_planning REQUIRED)
 find_package(moveit_ros_warehouse REQUIRED)
 find_package(pluginlib REQUIRED)
+
+moveit_package()
 
 include_directories(include)
 
@@ -26,7 +29,6 @@ add_library(${MOVEIT_LIB_NAME} SHARED
   src/BenchmarkExecutor.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   rclcpp
   Boost

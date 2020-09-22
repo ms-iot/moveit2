@@ -13,6 +13,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(Boost REQUIRED thread)
+find_package(moveit_common REQUIRED)
+
+moveit_package()
 
 if(APPLE)
   find_package(X11 REQUIRED)
@@ -37,7 +40,6 @@ add_library(${MOVEIT_LIB_NAME} SHARED
   src/occupancy_map_updater.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   rclcpp
   moveit_core

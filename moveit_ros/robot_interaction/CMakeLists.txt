@@ -6,6 +6,7 @@ find_package(moveit_common REQUIRED)
 moveit_package()
 
 find_package(Boost REQUIRED thread)
+find_package(moveit_common REQUIRED)
 find_package(moveit_ros_planning REQUIRED)
 find_package(interactive_markers REQUIRED)
 find_package(tf2 REQUIRED)
@@ -13,6 +14,8 @@ find_package(tf2_eigen REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(rclcpp REQUIRED)
+
+moveit_package()
 
 set(MOVEIT_LIB_NAME moveit_robot_interaction)
 
@@ -27,7 +30,6 @@ add_library(${MOVEIT_LIB_NAME} SHARED
   src/robot_interaction.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.

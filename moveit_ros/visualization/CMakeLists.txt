@@ -15,6 +15,7 @@ add_definitions(-DBOOST_MATH_DISABLE_FLOAT128)
 
 find_package(Boost REQUIRED thread date_time system filesystem)
 find_package(ament_cmake REQUIRED)
+find_package(moveit_common REQUIRED)
 find_package(class_loader REQUIRED)
 find_package(geometric_shapes REQUIRED)
 find_package(interactive_markers REQUIRED)
@@ -38,6 +39,8 @@ find_package(Eigen3 REQUIRED)
 find_package(rviz_common REQUIRED)
 find_package(rviz_default_plugins REQUIRED)
 find_package(rviz_ogre_vendor REQUIRED)
+
+moveit_package()
 
 # Qt Stuff
 find_package(Qt5 ${rviz_QT_VERSION} REQUIRED Core Widgets)

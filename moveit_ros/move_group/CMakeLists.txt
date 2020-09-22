@@ -7,6 +7,7 @@ moveit_package()
 
 find_package(Boost REQUIRED system filesystem date_time program_options thread)
 find_package(ament_cmake REQUIRED)
+find_package(moveit_common REQUIRED)
 find_package(moveit_core REQUIRED)
 find_package(moveit_ros_planning REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -17,12 +18,13 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
+moveit_package()
+
 add_library(moveit_move_group_capabilities_base SHARED src/move_group_context.cpp
   src/move_group_capability.cpp)
 set_target_properties(moveit_move_group_capabilities_base
   PROPERTIES
   VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(moveit_move_group_capabilities_base PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_include_directories(moveit_move_group_capabilities_base PUBLIC include)
 ament_target_dependencies(moveit_move_group_capabilities_base
   rclcpp moveit_core moveit_ros_planning tf2_geometry_msgs)
@@ -58,7 +60,6 @@ add_library(moveit_move_group_default_capabilities SHARED
 set_target_properties(moveit_move_group_default_capabilities
   PROPERTIES
   VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(moveit_move_group_default_capabilities PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_include_directories(moveit_move_group_default_capabilities PUBLIC include)
 ament_target_dependencies(moveit_move_group_default_capabilities
   rclcpp rclcpp_action moveit_core moveit_ros_planning std_srvs)

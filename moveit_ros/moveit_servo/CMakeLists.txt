@@ -9,6 +9,7 @@ find_package(moveit_common REQUIRED)
 moveit_package()
 
 find_package(ament_cmake REQUIRED)
+find_package(moveit_common REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
@@ -23,6 +24,8 @@ find_package(trajectory_msgs REQUIRED)
 find_package(moveit_ros_planning REQUIRED)
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
+
+moveit_package()
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   rclcpp

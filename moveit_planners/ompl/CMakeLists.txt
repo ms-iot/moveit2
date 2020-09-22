@@ -6,6 +6,7 @@ find_package(moveit_common REQUIRED)
 moveit_package()
 
 find_package(Boost REQUIRED system filesystem date_time thread serialization)
+find_package(moveit_common REQUIRED)
 find_package(moveit_core REQUIRED)
 find_package(moveit_ros_planning REQUIRED)
 find_package(rclcpp REQUIRED)

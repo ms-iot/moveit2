@@ -6,6 +6,9 @@ find_package(moveit_common REQUIRED)
 moveit_package()
 
 find_package(ament_cmake REQUIRED)
+find_package(moveit_common REQUIRED)
+moveit_package()
+
 find_package(rclcpp REQUIRED)
 find_package(Boost REQUIRED system filesystem date_time thread iostreams regex ${EXTRA_BOOST_COMPONENTS})
 
@@ -13,6 +16,9 @@ find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+
+#find_package(MOVEIT_COMMON REQUIRED)
+#moveit_package()
 
 # TODO(henningkayser): enable bullet once the library is migrated to ROS2
 # TODO: Move collision detection into separate packages

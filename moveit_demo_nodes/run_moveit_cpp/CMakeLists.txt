@@ -13,7 +13,6 @@ if (WIN32)
   add_compile_options(/wd4251 /wd4068 /wd4275)
 endif()
 
-
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(moveit_common REQUIRED)
@@ -24,6 +23,8 @@ find_package(Boost REQUIRED COMPONENTS system thread)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+moveit_package()
 
 add_executable(run_moveit_cpp src/run_moveit_cpp.cpp)
 ament_target_dependencies(run_moveit_cpp
