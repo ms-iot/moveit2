@@ -66,7 +66,7 @@ mesh_filter::MeshFilterBase::MeshFilterBase(const TransformCallback& transform_c
   , padding_offset_(0.01)
   , shadow_threshold_(0.5)
 {
-  filter_thread_ = boost::thread(boost::bind(&MeshFilterBase::run, this, render_vertex_shader, render_fragment_shader,
+  filter_thread_ = boost::thread(std::bind(&MeshFilterBase::run, this, render_vertex_shader, render_fragment_shader,
                                              filter_vertex_shader, filter_fragment_shader));
 }
 
@@ -171,7 +171,7 @@ mesh_filter::MeshHandle mesh_filter::MeshFilterBase::addMesh(const shapes::Mesh&
 {
   boost::mutex::scoped_lock _(meshes_mutex_);
 
-  JobPtr job(new FilterJob<void>(boost::bind(&MeshFilterBase::addMeshHelper, this, next_handle_, &mesh)));
+  JobPtr job(new FilterJob<void>(std::bind(&MeshFilterBase::addMeshHelper, this, next_handle_, &mesh)));
   addJob(job);
   job->wait();
   mesh_filter::MeshHandle ret = next_handle_;
@@ -194,7 +194,7 @@ void mesh_filter::MeshFilterBase::addMeshHelper(MeshHandle handle, const shapes:
 void mesh_filter::MeshFilterBase::removeMesh(MeshHandle handle)
 {
   boost::mutex::scoped_lock _(meshes_mutex_);
-  FilterJob<bool>* remover = new FilterJob<bool>(boost::bind(&MeshFilterBase::removeMeshHelper, this, handle));
+  FilterJob<bool>* remover = new FilterJob<bool>(std::bind(&MeshFilterBase::removeMeshHelper, this, handle));
   JobPtr job(remover);
   addJob(job);
   job->wait();
@@ -218,16 +218,16 @@ void mesh_filter::MeshFilterBase::setShadowThreshold(float threshold)
 void mesh_filter::MeshFilterBase::getModelLabels(LabelType* labels) const
 {
   JobPtr job(
-      new FilterJob<void>(boost::bind(&GLRenderer::getColorBuffer, mesh_renderer_.get(), (unsigned char*)labels)));
+      new FilterJob<void>(std::bind(&GLRenderer::getColorBuffer, mesh_renderer_.get(), (unsigned char*)labels)));
   addJob(job);
   job->wait();
 }
 
 void mesh_filter::MeshFilterBase::getModelDepth(float* depth) const
 {
-  JobPtr job1(new FilterJob<void>(boost::bind(&GLRenderer::getDepthBuffer, mesh_renderer_.get(), depth)));
+  JobPtr job1(new FilterJob<void>(std::bind(&GLRenderer::getDepthBuffer, mesh_renderer_.get(), depth)));
   JobPtr job2(new FilterJob<void>(
-      boost::bind(&SensorModel::Parameters::transformModelDepthToMetricDepth, sensor_parameters_.get(), depth)));
+      std::bind(&SensorModel::Parameters::transformModelDepthToMetricDepth, sensor_parameters_.get(), depth)));
   {
     boost::unique_lock<boost::mutex> lock(jobs_mutex_);
     jobs_queue_.push(job1);
@@ -240,9 +240,9 @@ void mesh_filter::MeshFilterBase::getModelDepth(float* depth) const
 
 void mesh_filter::MeshFilterBase::getFilteredDepth(float* depth) const
 {
-  JobPtr job1(new FilterJob<void>(boost::bind(&GLRenderer::getDepthBuffer, depth_filter_.get(), depth)));
+  JobPtr job1(new FilterJob<void>(std::bind(&GLRenderer::getDepthBuffer, depth_filter_.get(), depth)));
   JobPtr job2(new FilterJob<void>(
-      boost::bind(&SensorModel::Parameters::transformFilteredDepthToMetricDepth, sensor_parameters_.get(), depth)));
+      std::bind(&SensorModel::Parameters::transformFilteredDepthToMetricDepth, sensor_parameters_.get(), depth)));
   {
     boost::unique_lock<boost::mutex> lock(jobs_mutex_);
     jobs_queue_.push(job1);
@@ -256,7 +256,7 @@ void mesh_filter::MeshFilterBase::getFilteredDepth(float* depth) const
 void mesh_filter::MeshFilterBase::getFilteredLabels(LabelType* labels) const
 {
   JobPtr job(
-      new FilterJob<void>(boost::bind(&GLRenderer::getColorBuffer, depth_filter_.get(), (unsigned char*)labels)));
+      new FilterJob<void>(std::bind(&GLRenderer::getColorBuffer, depth_filter_.get(), (unsigned char*)labels)));
   addJob(job);
   job->wait();
 }
@@ -296,7 +296,7 @@ void mesh_filter::MeshFilterBase::filter(const void* sensor_data, GLushort type,
     throw std::runtime_error(msg.str());
   }
 
-  JobPtr job(new FilterJob<void>(boost::bind(&MeshFilterBase::doFilter, this, sensor_data, type)));
+  JobPtr job(new FilterJob<void>(std::bind(&MeshFilterBase::doFilter, this, sensor_data, type)));
   addJob(job);
   if (wait)
     job->wait();

@@ -87,9 +87,9 @@ bool MoveGroupCartesianPathService::computeService(
     const std::shared_ptr<moveit_msgs::srv::GetCartesianPath::Request> req,
     std::shared_ptr<moveit_msgs::srv::GetCartesianPath::Response> res)
 {
-  using boost::placeholders::_1;
-  using boost::placeholders::_2;
-  using boost::placeholders::_3;
+  using std::placeholders::_1;
+  using std::placeholders::_2;
+  using std::placeholders::_3;
 
   RCLCPP_INFO(LOGGER, "Received request to compute Cartesian path");
   context_->planning_scene_monitor_->updateFrameTransforms();
@@ -150,7 +150,7 @@ bool MoveGroupCartesianPathService::computeService(
             ls.reset(new planning_scene_monitor::LockedPlanningSceneRO(context_->planning_scene_monitor_));
             kset.reset(new kinematic_constraints::KinematicConstraintSet((*ls)->getRobotModel()));
             kset->add(req->path_constraints, (*ls)->getTransforms());
-            constraint_fn = boost::bind(
+            constraint_fn = std::bind(
                 &isStateValid,
                 req->avoid_collisions ? static_cast<const planning_scene::PlanningSceneConstPtr&>(*ls).get() : nullptr,
                 kset->empty() ? nullptr : kset.get(), _1, _2, _3);

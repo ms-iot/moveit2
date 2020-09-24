@@ -202,13 +202,13 @@ void OccupancyMapMonitor::addUpdater(const OccupancyMapUpdaterPtr& updater)
       if (map_updaters_.size() == 2)
       {
         map_updaters_[0]->setTransformCacheCallback(
-            boost::bind(&OccupancyMapMonitor::getShapeTransformCache, this, 0, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3));
+            std::bind(&OccupancyMapMonitor::getShapeTransformCache, this, 0, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
         map_updaters_[1]->setTransformCacheCallback(
-            boost::bind(&OccupancyMapMonitor::getShapeTransformCache, this, 1, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3));
+            std::bind(&OccupancyMapMonitor::getShapeTransformCache, this, 1, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
       }
       else
         map_updaters_.back()->setTransformCacheCallback(
-            boost::bind(&OccupancyMapMonitor::getShapeTransformCache, this, map_updaters_.size() - 1, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3));
+            std::bind(&OccupancyMapMonitor::getShapeTransformCache, this, map_updaters_.size() - 1, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     }
     else
       updater->setTransformCacheCallback(transform_cache_callback_);
