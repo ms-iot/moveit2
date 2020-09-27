@@ -47,6 +47,7 @@
 #include <moveit/controller_manager/controller_manager.h>
 #include <boost/thread.hpp>
 #include <pluginlib/class_loader.hpp>
+#include <deque>
 
 #include <memory>
 

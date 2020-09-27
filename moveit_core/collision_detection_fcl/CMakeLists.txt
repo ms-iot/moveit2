@@ -12,8 +12,10 @@ ament_target_dependencies(${MOVEIT_LIB_NAME}
   urdfdom
   urdfdom_headers
   LIBFCL
+  LIBCCD
   Boost
   visualization_msgs
+  OCTOMAP
 )
 target_link_libraries(${MOVEIT_LIB_NAME}
   moveit_collision_detection
@@ -36,6 +38,11 @@ target_link_libraries(collision_detector_fcl_plugin
   ${MOVEIT_LIB_NAME}
   moveit_planning_scene
 )
+
+# Causes the visibility macros to use dllexport rather than dllimport,
+# which is appropriate when building the dll but not consuming it.
+target_compile_definitions(collision_detector_fcl_plugin
+  PRIVATE "COLLISION_DETECTION_FCL_PLUGIN_BUILDING_LIBRARY")
 
 install(TARGETS ${MOVEIT_LIB_NAME} collision_detector_fcl_plugin
   LIBRARY DESTINATION lib

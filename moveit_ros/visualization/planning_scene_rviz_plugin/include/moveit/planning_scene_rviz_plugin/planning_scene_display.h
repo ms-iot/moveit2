@@ -67,7 +67,7 @@ class EnumProperty;
 
 namespace moveit_rviz_plugin
 {
-class PlanningSceneDisplay : public rviz_common::Display
+class PLANNING_SCENE_RVIZ_PLUGIN_PUBLIC PlanningSceneDisplay : public rviz_common::Display
 {
   Q_OBJECT
 

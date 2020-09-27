@@ -48,6 +48,7 @@
 #include <moveit/planning_scene_monitor/visibility_control.hpp>
 #include <moveit_msgs/srv/get_planning_scene.hpp>
 #include <boost/noncopyable.hpp>
+#include <boost/thread.hpp>
 #include <boost/thread/shared_mutex.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 #include <memory>
