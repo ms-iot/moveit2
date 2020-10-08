@@ -16,6 +16,10 @@ find_package(ompl REQUIRED)
 
 moveit_package()
 
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(-Wno-overloaded-virtual)
+endif()
+
 include_directories(ompl_interface/include)
 include_directories(SYSTEM
                     ${Boost_INCLUDE_DIRS}
