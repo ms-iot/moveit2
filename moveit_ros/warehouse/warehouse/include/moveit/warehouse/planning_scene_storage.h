@@ -37,6 +37,7 @@
 #pragma once
 
 #include "moveit/warehouse/moveit_message_storage.h"
+#include "moveit/warehouse/visibility_control.hpp"
 #include <moveit/macros/class_forward.h>
 #include <moveit_msgs/msg/planning_scene.hpp>
 #include <moveit_msgs/msg/motion_plan_request.hpp>
@@ -57,10 +58,10 @@ MOVEIT_CLASS_FORWARD(PlanningSceneStorage)  // Defines PlanningSceneStoragePtr, 
 class PlanningSceneStorage : public MoveItMessageStorage
 {
 public:
-  static const std::string DATABASE_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string DATABASE_NAME;
 
-  static const std::string PLANNING_SCENE_ID_NAME;
-  static const std::string MOTION_PLAN_REQUEST_ID_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string PLANNING_SCENE_ID_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string MOTION_PLAN_REQUEST_ID_NAME;
 
   PlanningSceneStorage(warehouse_ros::DatabaseConnection::Ptr conn);
 

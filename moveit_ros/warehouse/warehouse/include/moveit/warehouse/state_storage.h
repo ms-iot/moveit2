@@ -37,6 +37,7 @@
 #pragma once
 
 #include <moveit/warehouse/moveit_message_storage.h>
+#include <moveit/warehouse/visibility_control.hpp>
 #include <moveit/macros/class_forward.h>
 #include <moveit_msgs/msg/robot_state.hpp>
 
@@ -50,10 +51,10 @@ MOVEIT_CLASS_FORWARD(RobotStateStorage)  // Defines RobotStateStoragePtr, ConstP
 class RobotStateStorage : public MoveItMessageStorage
 {
 public:
-  static const std::string DATABASE_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string DATABASE_NAME;
 
-  static const std::string STATE_NAME;
-  static const std::string ROBOT_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string STATE_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string ROBOT_NAME;
 
   RobotStateStorage(warehouse_ros::DatabaseConnection::Ptr conn);
 

@@ -37,6 +37,7 @@
 #pragma once
 
 #include <moveit/warehouse/moveit_message_storage.h>
+#include <moveit/warehouse/visibility_control.hpp>
 #include <moveit_msgs/msg/planning_scene_world.hpp>
 
 namespace moveit_warehouse
@@ -47,8 +48,8 @@ typedef warehouse_ros::MessageCollection<moveit_msgs::msg::PlanningSceneWorld>::
 class PlanningSceneWorldStorage : public MoveItMessageStorage
 {
 public:
-  static const std::string DATABASE_NAME;
-  static const std::string PLANNING_SCENE_WORLD_ID_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string DATABASE_NAME;
+  MOVEIT_WAREHOUSE_PUBLIC static const std::string PLANNING_SCENE_WORLD_ID_NAME;
 
   PlanningSceneWorldStorage(warehouse_ros::DatabaseConnection::Ptr conn);
 

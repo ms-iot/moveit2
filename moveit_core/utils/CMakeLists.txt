@@ -26,13 +26,10 @@ if(BUILD_TESTING)
     ament_index_cpp
     Boost
     geometry_msgs
-    rclcpp
     urdf
     srdfdom
     urdfdom
     urdfdom_headers
-    moveit_resources
-    ament_index_cpp
   )
 
   set_target_properties(${MOVEIT_TEST_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
