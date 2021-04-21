@@ -1,42 +1,20 @@
 cmake_minimum_required(VERSION 3.10.2)
 project(moveit_core VERSION 2.0.0 LANGUAGES CXX)
 
-if(NOT "${CMAKE_CXX_STANDARD}")
-  set(CMAKE_CXX_STANDARD 14)
-endif()
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  # Enable warnings
-  add_compile_options(-Wall -Wextra
-    -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
-    -Wno-unused-parameter -Wno-unused-function)
-endif()
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-  # This too often has false-positives
-  add_compile_options(-Wno-maybe-uninitialized)
-endif()
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
-  message("${PROJECT_NAME}: You did not request a specific build type: Choosing 'Release' for maximum performance")
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
 find_package(ament_cmake REQUIRED)
+find_package(moveit_common REQUIRED)
+moveit_package()
+
 find_package(rclcpp REQUIRED)
-# boost::iostreams on Windows depends on boost::zlib
-if(WIN32)
-  set(EXTRA_BOOST_COMPONENTS zlib)
-endif()
 find_package(Boost REQUIRED system filesystem date_time thread iostreams regex ${EXTRA_BOOST_COMPONENTS})
 
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+
+#find_package(MOVEIT_COMMON REQUIRED)
+#moveit_package()
 
 # TODO(henningkayser): enable bullet once the library is migrated to ROS2
 # TODO: Move collision detection into separate packages
@@ -59,6 +37,11 @@ pkg_check_modules(LIBFCL REQUIRED "fcl>=0.5.0")
 find_library(LIBFCL_LIBRARIES_FULL ${LIBFCL_LIBRARIES} ${LIBFCL_LIBRARY_DIRS})
 set(LIBFCL_LIBRARIES "${LIBFCL_LIBRARIES_FULL}")
 
+if(WIN32)
+pkg_check_modules(LIBCCD REQUIRED ccd)
+find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
+set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
+endif()
 
 find_package(OCTOMAP REQUIRED)
 find_package(urdfdom REQUIRED)
