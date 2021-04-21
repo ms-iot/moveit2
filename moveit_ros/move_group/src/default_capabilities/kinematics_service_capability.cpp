@@ -154,9 +154,9 @@ bool MoveGroupKinematicsService::computeIKService(const std::shared_ptr<rmw_requ
                                                   const std::shared_ptr<moveit_msgs::srv::GetPositionIK::Request> req,
                                                   std::shared_ptr<moveit_msgs::srv::GetPositionIK::Response> res)
 {
-  using boost::placeholders::_1;
-  using boost::placeholders::_2;
-  using boost::placeholders::_3;
+  using std::placeholders::_1;
+  using std::placeholders::_2;
+  using std::placeholders::_3;
 
   context_->planning_scene_monitor_->updateFrameTransforms();
 
@@ -168,7 +168,7 @@ bool MoveGroupKinematicsService::computeIKService(const std::shared_ptr<rmw_requ
     moveit::core::RobotState rs = ls->getCurrentState();
     kset.add(req->ik_request.constraints, ls->getTransforms());
     computeIK(req->ik_request, res->solution, res->error_code, rs,
-              boost::bind(&isIKSolutionValid, req->ik_request.avoid_collisions ?
+              std::bind(&isIKSolutionValid, req->ik_request.avoid_collisions ?
                                                   static_cast<const planning_scene::PlanningSceneConstPtr&>(ls).get() :
                                                   nullptr,
                           kset.empty() ? nullptr : &kset, _1, _2, _3));

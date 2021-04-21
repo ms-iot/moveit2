@@ -73,7 +73,7 @@ RobotInteraction::RobotInteraction(const moveit::core::RobotModelConstPtr& robot
 
   // spin a thread that will process feedback events
   run_processing_thread_ = true;
-  processing_thread_.reset(new boost::thread(boost::bind(&RobotInteraction::processingThread, this)));
+  processing_thread_.reset(new boost::thread(std::bind(&RobotInteraction::processingThread, this)));
 }
 
 RobotInteraction::~RobotInteraction()
@@ -543,7 +543,7 @@ void RobotInteraction::addInteractiveMarkers(const InteractionHandlerPtr& handle
   {
     int_marker_server_->insert(im);
     int_marker_server_->setCallback(im.name,
-                                    boost::bind(&RobotInteraction::processInteractiveMarkerFeedback, this, boost::placeholders::_1));
+                                    std::bind(&RobotInteraction::processInteractiveMarkerFeedback, this, std::placeholders::_1));
 
     // Add menu handler to all markers that this interaction handler creates.
     if (std::shared_ptr<interactive_markers::MenuHandler> mh = handler->getMenuHandler())

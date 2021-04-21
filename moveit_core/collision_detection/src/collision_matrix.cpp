@@ -35,7 +35,6 @@
 /* Author: Ioan Sucan, E. Gil Jones */
 
 #include <moveit/collision_detection/collision_matrix.h>
-#include <boost/bind.hpp>
 #include <iomanip>
 #include "rclcpp/rclcpp.hpp"
 
@@ -281,7 +280,7 @@ bool AllowedCollisionMatrix::getAllowedCollision(const std::string& name1, const
     else if (!found1 && found2)
       fn = fn2;
     else if (found1 && found2)
-      fn = boost::bind(&andDecideContact, fn1, fn2, boost::placeholders::_1);
+      fn = std::bind(&andDecideContact, fn1, fn2, std::placeholders::_1);
     else
       return false;
     return true;
